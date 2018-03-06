@@ -84,6 +84,7 @@ export function logout() {
   return dispatch => {
     dispatch(removeToken());
     dispatch({ type: Types.AUTH_LOGOUT });
+     document.location = '/'
   };
 }
 

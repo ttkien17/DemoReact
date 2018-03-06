@@ -1,24 +1,36 @@
 import React, { Component } from "react";
-import _ from 'lodash'
-import { CardHeader, FormGroup, Label, Form, Alert, Container, Row, Col, CardGroup, Card, CardBody, Button, InputGroup, InputGroupAddon, Input } from "reactstrap";
-class News extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <Col xs="12" md={12}>
-                <Card>
-                    <CardHeader>
-                        <i className="fa fa-user" /> News
-                            </CardHeader>
-                    <CardBody>
-                        
-                    </CardBody>
-                </Card>
-            </Col>
-        );
-    }
-}
+import { Alert, Card, Col } from 'reactstrap';
 
-export default News
+const News = (props) => {
+    return (
+        <Col md="12">
+            <Card>
+                <Alert color="primary">
+                    This is a primary alert — check it out!
+      </Alert>
+                <Alert color="secondary">
+                    This is a secondary alert — check it out!
+      </Alert>
+                <Alert color="success">
+                    This is a success alert — check it out!
+      </Alert>
+                <Alert color="danger">
+                    This is a danger alert — check it out!
+      </Alert>
+                <Alert color="warning">
+                    This is a warning alert — check it out!
+      </Alert>
+                <Alert color="info">
+                    This is a info alert — check it out!
+      </Alert>
+                <Alert color="light">
+                    This is a light alert — check it out!
+      </Alert>
+                <Alert color="dark">
+                    This is a dark alert — check it out!
+      </Alert>
+            </Card>
+        </Col>
+    );
+};
+export default News;  
