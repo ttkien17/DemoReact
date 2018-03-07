@@ -1,3 +1,4 @@
+import React from 'react';
 const axios = require('axios')
 export const Types = {
   AUTH_LOGIN_REQUEST: "AUTH_LOGIN_REQUEST",
@@ -38,13 +39,13 @@ function getCookie(cname) {
 
 export function initAuth() {
   return (dispatch, getState) => {
-    dispatch({type: Types.AUTH_SET_PROFILE, profile: localStorage.getItem("profile")})
+    dispatch({ type: Types.AUTH_SET_PROFILE, profile: localStorage.getItem("profile") })
   };
 }
 
 function fetchLogin(userName, passWord) {
-  return dispatch => {
-    axios.post('http://10.20.33.127:4000/auth/login', { userName, passWord }, {
+  return async dispatch  => {
+    await axios.post('http://10.20.33.127:4000/auth/login', { userName, passWord }, {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         // 'Access-Control-Allow-Origin': '*',
@@ -58,15 +59,17 @@ function fetchLogin(userName, passWord) {
         return response.data.message;
       })
       .then(result => {
-        const {token} = result
-        if(typeof(result) === "object"){
+        const { token } = result
+        if (typeof (result) === "object") {
           localStorage.setItem("profile", JSON.stringify(result));
           dispatch(setToken(token));
           dispatch({ type: Types.AUTH_LOGIN_SUCCESS, token });
-          dispatch({type: Types.AUTH_SET_PROFILE, profile: result})
+          dispatch({ type: Types.AUTH_SET_PROFILE, profile: result })
           document.location = '/'
         }
-        else dispatch({ type: Types.AUTH_LOGIN_FAILURE, result });
+        else {
+          dispatch({ type: Types.AUTH_LOGIN_FAILURE, error: result });
+        }
       })
       .catch(error => {
         console.error(error);
@@ -84,7 +87,7 @@ export function logout() {
   return dispatch => {
     dispatch(removeToken());
     dispatch({ type: Types.AUTH_LOGOUT });
-     document.location = '/'
+    document.location = '/'
   };
 }
 

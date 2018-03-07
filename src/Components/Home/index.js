@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import _ from 'lodash'
 import { CardHeader, FormGroup, Label, Form, Alert, Container, Row, Col, CardGroup, Card, CardBody, Button, InputGroup, InputGroupAddon, Input } from "reactstrap";
 class Home extends Component {
     constructor(props) {
