@@ -27,24 +27,6 @@ export default function authencation(state = initialState, action) {
         error: action.error
       });
 
-    case Types.AUTH_REGISTER_REQUEST:
-      return Object.assign({}, state, { isFetching: true });
-
-    case Types.AUTH_REGISTER_SUCCESS:
-      return Object.assign({}, state, {
-        isAuthed: true,
-        isFetching: false,
-        accessToken: action.token,
-        error: null
-      });
-
-    case Types.AUTH_REGISTER_FAILURE:
-      return Object.assign({}, state, {
-        isAuthed: false,
-        isFetching: false,
-        error: action.error
-      });
-
     case Types.AUTH_LOGOUT:
       return Object.assign({}, initialState, {
         isAuthed: false
@@ -52,19 +34,6 @@ export default function authencation(state = initialState, action) {
 
     case Types.AUTH_SET_PROFILE:
       return Object.assign({}, state, { profile: action.profile });
-
-    case Types.AUTH_ME_REQUEST:
-      return Object.assign({}, state, { isFetching: true });
-
-    case Types.AUTH_ME_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: false
-      });
-
-    case Types.AUTH_ME_FAILURE:
-      return Object.assign({}, state, {
-        isFetching: false
-      });
 
     default:
       return state;
