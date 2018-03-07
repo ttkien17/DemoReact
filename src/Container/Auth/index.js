@@ -10,7 +10,8 @@ class Login extends Component {
       isFetching: false
     };
   }
-  handleLogin() {
+  handleLogin(e) {
+    e.preventDefault()
     const { dispatch } = this.props
     const { username, password } = this.refs;
     dispatch(loginRequest(username.value, password.value))
@@ -27,7 +28,7 @@ class Login extends Component {
                 <CardBody>
                   <h1>Đăng nhập</h1>
                   <p className="text-muted">Đăng nhập vào tài khoản của bạn</p>
-                  <Form onSubmit={() => this.handleLogin()}>
+                  <Form onSubmit={this.handleLogin.bind(this)}>
                     <InputGroup className="mb-3">
                       <InputGroupAddon>E</InputGroupAddon>
                       <input className="form-control" type="text" ref="username" placeholder="nhap email" />
@@ -40,7 +41,7 @@ class Login extends Component {
                     </InputGroup>
                     <Row>
                       <Col xs="12">
-                        <Button onClick={() => this.handleLogin()}>
+                        <Button>
                           Đăng nhập
                         </Button>
                       </Col>

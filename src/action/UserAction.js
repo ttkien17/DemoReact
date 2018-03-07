@@ -59,11 +59,14 @@ function fetchLogin(userName, passWord) {
       })
       .then(result => {
         const {token} = result
-        localStorage.setItem("profile", JSON.stringify(result));
-        dispatch(setToken(token));
-        dispatch({ type: Types.AUTH_LOGIN_SUCCESS, token });
-        dispatch({type: Types.AUTH_SET_PROFILE, profile: result})
-        document.location = '/'
+        if(typeof(result) === "object"){
+          localStorage.setItem("profile", JSON.stringify(result));
+          dispatch(setToken(token));
+          dispatch({ type: Types.AUTH_LOGIN_SUCCESS, token });
+          dispatch({type: Types.AUTH_SET_PROFILE, profile: result})
+          document.location = '/'
+        }
+        else dispatch({ type: Types.AUTH_LOGIN_FAILURE, result });
       })
       .catch(error => {
         console.error(error);
@@ -88,5 +91,6 @@ export function logout() {
 function removeToken() {
   return dispatch => {
     localStorage.removeItem("token");
+    localStorage.removeItem("profile");
   };
 }
